@@ -419,6 +419,7 @@
 				1C386E6E1B35B41B0067AF3C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1C386E6F1B35B41B0067AF3C /* Build configuration list for PBXNativeTarget "Swift BugsTests" */ = {
 			isa = XCConfigurationList;
@@ -427,6 +428,7 @@
 				1C386E711B35B41B0067AF3C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
