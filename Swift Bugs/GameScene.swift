@@ -21,13 +21,16 @@ class GameScene: SKScene {
         self.addChild(myLabel)
         */
         
-        for idx in 1...20 {
-            let mySprite = SKSpriteNode(imageNamed:"bug")
+        for idx in 1...50 {
+            let mySprite = Bug(imageNamed:"bug")
             let frameX = arc4random_uniform(UInt32(UInt(self.frame.width)))
             let frameY = arc4random_uniform(UInt32(UInt(self.frame.height)))
             mySprite.position = CGPoint(x:CGFloat(frameX), y:CGFloat(frameY))
-            mySprite.xScale = 0.5
-            mySprite.yScale = 0.5
+            mySprite.xScale = 0.25
+            mySprite.yScale = 0.25
+            mySprite.physicsBody = SKPhysicsBody(rectangleOfSize: mySprite.size)
+            mySprite.physicsBody!.affectedByGravity = false
+            //mySprite.physicsBody!.friction = 0.8
             self.addChild(mySprite)
         }
     }
@@ -36,19 +39,32 @@ class GameScene: SKScene {
         /* Called when a touch begins */
         
         for touch in (touches as! Set<UITouch>) {
+            let location = touch.locationInNode(self)
             
             for sprite in self.children {
                 
-                let frameX = arc4random_uniform(UInt32(UInt(self.frame.width)))
-                let frameY = arc4random_uniform(UInt32(UInt(self.frame.height)))
+                sprite.physicsBody!!.velocity=CGVector(dx: location.x - sprite.position.x, dy: location.y - sprite.position.y);
+                sprite.physicsBody!!.angularVelocity=CGFloat(20)
                 
+                avoidBorders(sprite as! SKSpriteNode)
+                
+                /*
                 let action = SKAction.moveTo(CGPoint(x:CGFloat(frameX), y:CGFloat(frameY)), duration: 2)
                 sprite.runAction(action)
+                */
             }
         }
     }
    
     override func update(currentTime: CFTimeInterval) {
-        /* Called before each frame is rendered */
+        for sprite in self.children {
+            
+        }
+    }
+    
+    func avoidBorders(sprite: SKSpriteNode) {
+//        if sprite.position.x > self.frame.width + sprite.size.width {
+//            sprite.position.x = -1 * sprite.size.width
+//        }
     }
 }
